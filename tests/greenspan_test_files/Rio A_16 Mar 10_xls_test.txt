@@ -1,0 +1,78 @@
+[header]
+# format choices: ysi,greenspan,hydrotech,hydrolab,macroctd,eureka
+format = 'greenspan'
+
+
+[format_parameters]
+# log file name: if present in file else leave blank
+log_file_name = 
+
+# timezone: if present in file else leave blank
+tz = 
+
+# site name: if present in file else leave blank
+site_name = 'Rio A'
+
+# instrument serial number, if present in file else leave blank
+serial_number = 
+
+# datetimes in fmt MM/DD/YYYY hh:mm:ss, if datetimes not provided in
+# file header then use first and last line in data
+# datetime provided in first line of data
+setup_time = '02/13/2010 12:00:00'
+start_time = '02/13/2010 12:00:00'
+stop_time = '03/16/2010 15:00:00'
+
+
+[data]
+# parameters provided (comma delimited, in column order)
+# 'air_pressure' : Atmospheric Pressure
+# 'instrument_battery_voltage' : Battery Voltage
+# 'water_specific_conductance' : Specific Conductance(Normalized @25degC)
+# 'water_electrical_conductivity' : Conductivity(Not Normalized)
+# 'water_dissolved_oxygen_concentration' : Dissolved Oxygen Concentration
+# 'water_dissolved_oxygen_percent_saturation' : Dissolved Oxygen Saturation Concentration
+# 'water_ph' : pH Level
+# 'seawater_salinity' : Salinity
+# 'water_temperature' : Water Temperature
+# 'air_temperature' : Air Temperature
+# 'water_turbidity' : Turbidity
+# 'water_depth_non_vented' : Water Surface Elevation (No Atm Pressure Correction)
+# 'water_depth_vented' : Water Surface Elevation (Atm Pressure Corrected)
+# These are the header of parameters = [DO, Temp, Ec, pH]
+parameters = ['instrument_battery_voltage','water_dissolved_oxygen_concentration','water_temperature','water_electrical_conductivity','water_ph']
+
+
+# units (comma delimited, in column order)
+# depth: ftH2O (feet), mH2O (meters), psi
+# conductivity: uScm (uS/cm), mScm (mS/cm)
+# salinity: ppt, psu
+# temperature: degC, degF
+# battery: volt
+# dissolved oxygen: mgl (mg/l), percent (% Sat)
+# turbidity: ntu
+# ph (dimensionless): dl 
+#These are the header of parameters = [volt, mgl, C, uscm, ph]
+units = ['volt', 'mgl', 'degC','uScm', 'dl']
+
+# Now we need to provide a list of known data values to test against.
+# For each data record that needs to be tested, the first value should
+# be the datetime in the "MM/DD/YYYY hh:mm:ss" format, followed by a
+# comma delimited list of parameter values in column order as
+# above. If there are parameter values that are not available for some
+# reason (e.g. a sensor goes out), enter the value as "nan". This list
+# should include AT LEAST the first three records of data, a set of
+# three records from some random location in the file and the last
+# three records of data
+test_data = """[ #Do not edit this line
+['02/13/2010 12:00:00', 'nan', 9.35, 17.94, 420.6, 8.96],
+['02/13/2010 13:00:00', 'nan', 9.02, 20.01, 359.8, 8.57],
+['02/14/2010 00:00:00', 10.32, 9.11, 20.41, 351.2, 6.75],
+['02/14/2010 01:00:00', 'nan', 9.11, 20.38, 349, 6.72],
+['02/14/2010 02:00:00', 'nan', 9.11, 20.38, 351.9, 6.69],
+['02/14/2010 03:00:00', 'nan', 9.11, 20.38, 354.9, 6.67],
+['03/16/2010 13:00:00', 'nan',-0.13, 17.36, 439.6, 7.84],
+['03/16/2010 14:00:00', 'nan', -0.13, 17.03, 438.4, 7.66],
+['03/16/2010 15:00:00', 'nan', -0.13, 18.94, 391.8, 7.49],
+]   #Do not edit this line
+""" #Do not edit this line
